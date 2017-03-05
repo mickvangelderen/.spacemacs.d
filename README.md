@@ -1,6 +1,6 @@
 # .spacemacs.d
 
-This repository contains my spacemacs configuration.
+This repository contains my spacemacs configuration :+1:.
 
 ## External dependencies
 
