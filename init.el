@@ -59,13 +59,14 @@ values."
      ;; version-control
 
      ;; Personal layers.
+     emojify
      editorconfig
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(emojify)
+   dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -319,11 +320,4 @@ you should place your code here."
   ;;                             (set-fill-column 72)
   ;;                             (spacemacs/toggle-fill-column-indicator-on)
   ;;                             ))
-
-  ;; Configure emojify.
-  ;; https://github.com/iqbalansari/emacs-emojify
-  (global-emojify-mode)
-  (emojify-set-emoji-styles '(github))
-  (setq emojify-point-entered-behaviour 'uncover)
-  (setq emojify-show-help nil)
   )
