@@ -49,6 +49,7 @@ values."
      (javascript :variables
                  js2-strict-missing-semi-warning nil
                  )
+     c-c++
      markdown
      ;; org
      ;; (shell :variables
