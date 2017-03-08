@@ -39,18 +39,10 @@ values."
      (ivy :variables
           ;; By default an ivy search starts with '^'. I don't like that.
           ivy-initial-inputs-alist nil)
-
      auto-completion
      (git :variables
           git-magit-status-fullscreen t
           )
-     emacs-lisp
-     html
-     (javascript :variables
-                 js2-strict-missing-semi-warning nil
-                 )
-     c-c++
-     markdown
      org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -58,6 +50,17 @@ values."
      ;; spell-checking
      syntax-checking
      ;; version-control
+
+     ;; Languages
+     emacs-lisp
+     html
+     yaml
+     python
+     (javascript :variables
+                 js2-strict-missing-semi-warning nil
+                 )
+     c-c++
+     markdown
 
      ;; Personal layers.
      emojify
