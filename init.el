@@ -51,7 +51,7 @@ values."
                  )
      c-c++
      markdown
-     ;; org
+     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -321,4 +321,26 @@ you should place your code here."
   ;;                             (set-fill-column 72)
   ;;                             (spacemacs/toggle-fill-column-indicator-on)
   ;;                             ))
+
+  ;; http://spacemacs.org/layers/+emacs/org/README.html#important-note
+  ;; TL;DR: org config must be in an with-eval-after-load.
+  (with-eval-after-load 'org
+    (setq org-directory "~/Dropbox/org")
+    (setq org-default-notes-file (concat org-directory "/index.org"))
+    (setq org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)" "CANCELLED(c)")))
+
+    ;; Adaptation of
+    ;; http://stackoverflow.com/questions/6997387/how-to-archive-all-the-done-tasks-using-a-single-command
+    ;; that ruthlessly archives anything that has a closed property.
+    (defun mickvangelderen/org-archive-closed-tasks ()
+      (interactive)
+      ;; http://orgmode.org/manual/Using-the-mapping-API.html
+      (org-map-entries
+       (lambda ()
+         (org-archive-subtree)
+         (setq org-map-continue-from (outline-previous-heading)))
+       ;; http://orgmode.org/manual/Matching-tags-and-properties.html
+       "CLOSED<>\"\""
+       'file))
+    )
   )
