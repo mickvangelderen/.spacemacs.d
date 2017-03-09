@@ -61,7 +61,11 @@ values."
      (javascript :variables
                  js2-strict-missing-semi-warning nil
                  )
-     c-c++
+     (c-c++ :variables
+            c-c++-default-mode-for-headers 'c++-mode
+            c-c++-enable-clang-support t
+            )
+
      markdown
 
      ;; Personal layers.
