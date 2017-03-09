@@ -52,6 +52,7 @@ values."
      ;; spell-checking
      syntax-checking
      ;; version-control
+     semantic
 
      ;; Languages
      emacs-lisp
