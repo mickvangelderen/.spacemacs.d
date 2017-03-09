@@ -352,4 +352,7 @@ you should place your code here."
        "CLOSED<>\"\""
        'file))
     )
+
+  ;; Disable smartparens https://github.com/syl20bnr/spacemacs/issues/1603
+  (remove-hook 'prog-mode-hook #'smartparens-mode)
   )
