@@ -41,6 +41,8 @@ values."
           ivy-initial-inputs-alist nil)
      auto-completion
      (git :variables
+          git-commit-summary-max-length 50
+          git-commit-fill-column 72
           git-magit-status-fullscreen t
           )
      org
