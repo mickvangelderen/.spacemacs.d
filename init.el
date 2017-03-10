@@ -56,6 +56,8 @@ values."
 
      ;; Languages
      emacs-lisp
+     latex
+     bibtex
      html
      yaml
      python
