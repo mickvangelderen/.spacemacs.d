@@ -370,6 +370,11 @@ you should place your code here."
        'file))
     )
 
+  ;; Allow entering an uncompleted input. The default keybind (C-M-j) does not
+  ;; work for me.
+  (with-eval-after-load 'ivy
+    '(define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-immediate-done))
+
   ;; Disable smartparens https://github.com/syl20bnr/spacemacs/issues/1603
   (remove-hook 'prog-mode-hook #'smartparens-mode)
   )
