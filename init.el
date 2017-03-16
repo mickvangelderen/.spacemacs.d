@@ -394,3 +394,9 @@ you should place your code here."
   ;; Disable smartparens https://github.com/syl20bnr/spacemacs/issues/1603
   (remove-hook 'prog-mode-hook #'smartparens-mode)
   )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+)
