@@ -56,6 +56,7 @@ values."
      semantic
 
      ;; Languages
+     csv
      emacs-lisp
      latex
      bibtex
