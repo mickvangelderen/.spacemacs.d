@@ -352,6 +352,16 @@ you should place your code here."
   ;;                             (spacemacs/toggle-fill-column-indicator-on)
   ;;                             ))
 
+  ;; Set nicer indentation rules.
+  (defun mickvangelderen/c-mode-common-hook ()
+    (c-set-offset 'arglist-intro '+)
+    (c-set-offset 'arglist-close 0)
+    (c-set-offset 'statement-cont 0)
+    (c-set-offset 'statement-block-intro '+)
+    )
+
+  (add-hook 'c-mode-common-hook 'mickvangelderen/c-mode-common-hook)
+
   ;; http://spacemacs.org/layers/+emacs/org/README.html#important-note
   ;; TL;DR: org config must be in an with-eval-after-load.
   (with-eval-after-load 'org
