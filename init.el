@@ -81,7 +81,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(zotxt)
+   dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -391,8 +391,6 @@ you should place your code here."
        "CLOSED<>\"\""
        'file))
     )
-
-  (add-hook 'org-mode-hook #'(org-zotxt-mode 1))
 
   ;; Refresh the magit buffer when we focus emacs.
   (add-hook 'magit-mode-hook
