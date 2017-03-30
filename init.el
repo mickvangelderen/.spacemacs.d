@@ -62,7 +62,7 @@ values."
      bibtex
      html
      yaml
-     python
+     ;; python
      (javascript :variables
                  js2-strict-missing-semi-warning nil
                  )
