@@ -362,6 +362,10 @@ you should place your code here."
     (c-set-offset 'statement-cont 0)
     (c-set-offset 'statement-block-intro '+)
     (c-set-offset 'case-label '+)
+
+    ;; Make _ part of the word class.
+    ;; https://github.com/emacs-evil/evil#underscore-_-is-not-a-word-character
+    (modify-syntax-entry ?_ "w")
     )
 
   (add-hook 'c-mode-common-hook 'mickvangelderen/c-mode-common-hook)
