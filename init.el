@@ -394,6 +394,10 @@ you should place your code here."
 
   (add-hook 'org-mode-hook #'(org-zotxt-mode 1))
 
+  ;; Refresh the magit buffer when we focus emacs.
+  (add-hook 'magit-mode-hook
+            (lambda () (add-hook 'focus-in-hook 'magit-refresh)))
+
   ;; Allow entering an uncompleted input. The default keybind (C-M-j) does not
   ;; work for me.
   (with-eval-after-load 'ivy
