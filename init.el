@@ -353,12 +353,15 @@ you should place your code here."
   ;;                             (spacemacs/toggle-fill-column-indicator-on)
   ;;                             ))
 
-  ;; Set nicer indentation rules.
   (defun mickvangelderen/c-mode-common-hook ()
+    "Customize c-mode-common to my liking."
+    ;; My personal indentation favorites.
     (c-set-offset 'arglist-intro '+)
     (c-set-offset 'arglist-close 0)
+    (c-set-offset 'c 0)
     (c-set-offset 'statement-cont 0)
     (c-set-offset 'statement-block-intro '+)
+    (c-set-offset 'case-label '+)
     )
 
   (add-hook 'c-mode-common-hook 'mickvangelderen/c-mode-common-hook)
