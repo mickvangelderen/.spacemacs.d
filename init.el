@@ -48,9 +48,8 @@ values."
      (version-control :variables
                       version-control-global-margin t)
      org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     shell
+
      ;; spell-checking
      syntax-checking
      semantic
