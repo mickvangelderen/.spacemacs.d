@@ -392,7 +392,7 @@ you should place your code here."
 
   ;; Refresh the magit buffer when we focus emacs.
   (add-hook 'magit-mode-hook
-            (lambda () (add-hook 'focus-in-hook 'magit-refresh)))
+            (lambda () (add-hook 'focus-in-hook 'magit-refresh nil t)))
 
   ;; Allow entering an uncompleted input. The default keybind (C-M-j) does not
   ;; work for me.
