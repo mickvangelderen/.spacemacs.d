@@ -72,6 +72,7 @@ values."
             )
 
      markdown
+     rust
 
      ;; Personal layers.
      emojify
