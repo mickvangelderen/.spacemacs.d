@@ -55,6 +55,7 @@ values."
      semantic
 
      ;; Languages
+     asm
      csv
      emacs-lisp
      latex
