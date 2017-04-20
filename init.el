@@ -401,6 +401,9 @@ you should place your code here."
 
   ;; Disable smartparens https://github.com/syl20bnr/spacemacs/issues/1603
   (remove-hook 'prog-mode-hook #'smartparens-mode)
+
+  ;; Open the project directory instead of a file when switching projects.
+  (setq projectile-switch-project-action 'projectile-dired)
   )
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
