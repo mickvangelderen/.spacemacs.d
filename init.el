@@ -56,11 +56,16 @@ values."
 
      ;; Languages
      asm
+     bibtex
+     csharp
      csv
      emacs-lisp
-     latex
-     bibtex
+     gpu
      html
+     latex
+     markdown
+     rust
+     sql
      yaml
      ;; python
      (javascript :variables
@@ -70,9 +75,6 @@ values."
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-support t
             )
-
-     markdown
-     rust
 
      ;; Personal layers.
      emojify
