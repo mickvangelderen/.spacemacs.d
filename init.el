@@ -68,6 +68,7 @@ values."
      protobuf
      rust
      sql
+     typescript
      yaml
      ;; python
      (javascript :variables
