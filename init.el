@@ -65,6 +65,7 @@ values."
      html
      latex
      markdown
+     protobuf
      rust
      sql
      yaml
