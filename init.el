@@ -35,53 +35,32 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     (ivy :variables
-          ;; By default an ivy search starts with '^'. I don't like that.
-          ivy-initial-inputs-alist nil)
+     helm
      ;; auto-completion
      ;; better-defaults
+     emacs-lisp
      (git :variables
           git-commit-summary-max-length 50
           git-commit-fill-column 72
           git-magit-status-fullscreen t
           )
-     (version-control :variables
-                      version-control-global-margin t)
-     org
-     shell
-
+     markdown
+     neotree
+     ;; org
+     ;; (shell :variables
+     ;;        shell-default-height 30
+     ;;        shell-default-position 'bottom)
      ;; spell-checking
      syntax-checking
-     semantic
-
-     ;; Languages
-     asm
-     bibtex
-     csharp
-     csv
-     emacs-lisp
-     gpu
-     html
-     latex
-     markdown
-     protobuf
-     rust
-     sql
-     (typescript :variables
-                 typescript-fmt-on-save t
-                 typescript-fmt-tool 'typescript-formatter)
-     yaml
-     ;; python
-     (javascript :variables
-                 js2-strict-missing-semi-warning nil
-                 )
+     (version-control :variables
+                      version-control-global-margin t
+                      )
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-support t
             )
-
-     ;; Personal layers.
-     emojify
+     gpu
+     rust
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -119,6 +98,10 @@ It should only modify the values of Spacemacs settings."
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
    dotspacemacs-elpa-timeout 5
+   ;; If non-nil then Spacelpa repository is the primary source to install
+   ;; a locked version of packages. If nil then Spacemacs will install the lastest
+   ;; version of packages from MELPA. (default nil)
+   dotspacemacs-use-spacelpa nil
    ;; If non-nil then verify the signature for downloaded Spacelpa archives.
    ;; (default nil)
    dotspacemacs-verify-spacelpa-archives nil
@@ -154,8 +137,7 @@ It should only modify the values of Spacemacs settings."
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
    dotspacemacs-startup-lists '((recents . 5)
-                                (projects . 5)
-                                (bookmarks . 5))
+                                (projects . 7))
    ;; True if the home buffer should respond to resize events. (default t)
    dotspacemacs-startup-buffer-responsive t
    ;; Default major mode of the scratch buffer (default `text-mode')
@@ -375,101 +357,57 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  )
+  (setq magit-repository-directories '("~/projects/")))
 
 (defun dotspacemacs/user-config ()
-  "Configuration function for user code.
-This function is called at the very end of Spacemacs initialization after
-layers configuration.
-This is the place where most of your configurations should be done. Unless it is
-explicitly specified that a variable should be set before a package is loaded,
-you should place your code here."
+  "Configuration for user code:
+This function is called at the very end of Spacemacs startup, after layer
+configuration.
+Put your configuration code here, except for variables that should be set
+before packages are loaded."
+  ;; https://github.com/syl20bnr/spacemacs/issues/1603#issuecomment-213570021
+  (remove-hook 'prog-mode-hook #'smartparens-mode)
+  (spacemacs/toggle-smartparens-globally-off)
 
-  ;; Set fill column and enable indicator.
-  ;; (add-hook 'prog-mode-hook (lambda ()
-  ;;                             (set-fill-column 72)
-  ;;                             (spacemacs/toggle-fill-column-indicator-on)
-  ;;                             ))
+  (global-git-commit-mode t)
+
+  (defun mickvangelderen/prog-mode-hook ()
+    "Cusomize prog mode to my liking."
+    (set-fill-column 72)
+    ;; (spacemacs/toggle-fill-column-indicator-on)
+    )
+  (add-hook 'prog-mode-hook 'mickvangelderen/prog-mode-hook)
 
   (defun mickvangelderen/c-mode-common-hook ()
     "Customize c-mode-common to my liking."
-    ;; My personal indentation favorites.
+    ;; Indentation rules
     (c-set-offset 'arglist-intro '+)
     (c-set-offset 'arglist-close 0)
     (c-set-offset 'c 0)
     (c-set-offset 'statement-cont 0)
     (c-set-offset 'statement-block-intro '+)
     (c-set-offset 'case-label '+)
-
     ;; Make _ part of the word class.
     ;; https://github.com/emacs-evil/evil#underscore-_-is-not-a-word-character
     (modify-syntax-entry ?_ "w")
     )
-
   (add-hook 'c-mode-common-hook 'mickvangelderen/c-mode-common-hook)
 
-  ;; http://spacemacs.org/layers/+emacs/org/README.html#important-note
-  ;; TL;DR: org config must be in an with-eval-after-load.
-  (with-eval-after-load 'org
-    (setq org-directory "~/Dropbox/org")
-    (setq org-default-notes-file (concat org-directory "/index.org"))
-    (setq org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)" "CANCELLED(c)")))
-
-    ;; Adaptation of
-    ;; http://stackoverflow.com/questions/6997387/how-to-archive-all-the-done-tasks-using-a-single-command
-    ;; that ruthlessly archives anything that has a closed property.
-    (defun mickvangelderen/org-archive-closed-tasks ()
-      (interactive)
-      ;; http://orgmode.org/manual/Using-the-mapping-API.html
-      (org-map-entries
-       (lambda ()
-         (org-archive-subtree)
-         (setq org-map-continue-from (outline-previous-heading)))
-       ;; http://orgmode.org/manual/Matching-tags-and-properties.html
-       "CLOSED<>\"\""
-       'file))
+  (defun mickvangelderen/rust-hook ()
+    "Customize rust-mode to my liking."
+    (modify-syntax-entry ?_ "w")
     )
+  (add-hook 'rust-mode-hook 'mickvangelderen/rust-hook)
 
-  ;; Refresh the magit buffer when we focus emacs.
-  (add-hook 'magit-mode-hook
-            (lambda () (add-hook 'focus-in-hook 'magit-refresh nil t)))
-
-  ;; Allow entering an uncompleted input. The default keybind (C-M-j) does not
-  ;; work for me.
-  (with-eval-after-load 'ivy
-    '(define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-immediate-done))
-
-  ;; Disable smartparens https://github.com/syl20bnr/spacemacs/issues/1603
-  (remove-hook 'prog-mode-hook #'smartparens-mode)
+  (defun mickvangelderen/magit-focus-hook ()
+    "Add a hook that refreshes magit when the emacs window is focussed."
+    (add-hook 'focus-in-hook 'magit-refresh nil t)
+    )
+  (add-hook 'magit-mode-hook 'mickvangelderen/magit-focus-hook)
 
   ;; Open the project directory instead of a file when switching projects.
   (setq projectile-switch-project-action 'projectile-dired)
-  "Configuration for user code:
-This function is called at the very end of Spacemacs startup, after layer
-configuration.
-Put your configuration code here, except for variables that should be set
-before packages are loaded."
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (counsel smartparens evil flycheck helm helm-core yasnippet markdown-mode org-plus-contrib magit magit-popup haml-mode js2-mode ivy impatient-mode helm-gitignore helm-css-scss company-web web-completion-data company-tern dash-functional company-c-headers company-auctex company yaml-mode xterm-color x86-lookup ws-butler winum which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tide tern tagedit symon string-inflection stickyfunc-enhance srefactor sql-indent spaceline smex smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs request realgud rainbow-delimiters racer pug-mode protobuf-mode popwin persp-mode pcre2el password-generator paradox orgit org-ref org-projectile org-present org-pomodoro org-download org-bullets org-brain opencl-mode open-junk-file omnisharp neotree nasm-mode multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc ivy-purpose ivy-hydra info+ indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio gnuplot glsl-mode gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md flycheck-rust flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emojify emmet-mode elisp-slime-nav editorconfig dumb-jump disaster diff-hl define-word cuda-mode csv-mode counsel-projectile column-enforce-mode coffee-mode cmake-mode clean-aindent-mode clang-format cargo browse-at-remote auto-highlight-symbol auto-compile auctex-latexmk aggressive-indent adaptive-wrap ace-window ace-link))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
