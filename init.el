@@ -61,6 +61,7 @@ This function should only modify configuration layer settings."
             c-c++-enable-clang-support t
             )
      gpu
+     python
      rust
      )
    ;; List of additional packages that will be installed without being
