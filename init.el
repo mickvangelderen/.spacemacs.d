@@ -41,7 +41,7 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      csv
      helm
-     ;; auto-completion
+     auto-completion
      ;; better-defaults
      emacs-lisp
      (git :variables
