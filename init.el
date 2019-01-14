@@ -61,10 +61,16 @@ This function should only modify configuration layer settings."
                       version-control-global-margin t)
 
      ;; Extra
+
+     ;; Language Server Protocol. The additional information makes my cursor go
+     ;; weird, even though it is useful so we disable the doc and sideline.
+     (lsp :variables
+          lsp-ui-doc-enable nil
+          lsp-ui-sideline-enable nil)
+
      (rust :variables
-           rust-backend 'lsp
-           rust-format-on-save t)
-     shaders
+           rust-backend 'lsp)
+     gpu
      )
 
    ;; List of additional packages that will be installed without being
@@ -358,7 +364,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
