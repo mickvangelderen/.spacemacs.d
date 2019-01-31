@@ -61,7 +61,11 @@ This function should only modify configuration layer settings."
                       version-control-global-margin t)
 
      ;; Extra
-
+     (c-c++ :variables
+            c-c++-enable-clang-support t
+            c-c++-enable-clang-format-on-save t
+            c-c++-default-mode-for-headers  'c++-mode)
+     gpu
      ;; Language Server Protocol. The additional information makes my cursor go
      ;; weird, even though it is useful so we disable the doc and sideline.
      (lsp :variables
@@ -69,11 +73,6 @@ This function should only modify configuration layer settings."
           lsp-ui-sideline-enable nil)
      (rust :variables
            rust-backend 'lsp)
-     (c-c++ :variables
-            c-c++-enable-clang-support t
-            c-c++-enable-clang-format-on-save t
-            c-c++-default-mode-for-headers  'c++-mode)
-     gpu
      )
 
    ;; List of additional packages that will be installed without being
