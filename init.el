@@ -66,6 +66,7 @@ This function should only modify configuration layer settings."
             c-c++-enable-clang-format-on-save t
             c-c++-default-mode-for-headers  'c++-mode)
      gpu
+     gtags
      ;; Language Server Protocol. The additional information makes my cursor go
      ;; weird, even though it is useful so we disable the doc and sideline.
      (lsp :variables
