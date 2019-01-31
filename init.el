@@ -69,7 +69,10 @@ This function should only modify configuration layer settings."
           lsp-ui-sideline-enable nil)
      (rust :variables
            rust-backend 'lsp)
-     c-c++
+     (c-c++ :variables
+            c-c++-enable-clang-support t
+            c-c++-enable-clang-format-on-save t
+            c-c++-default-mode-for-headers  'c++-mode)
      gpu
      )
 
