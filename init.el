@@ -493,7 +493,7 @@ before packages are loaded."
   (add-hook 'prog-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
   ;; Open the project directory instead of a file when switching projects.
-  ;; (setq projectile-switch-project-action 'projectile-dired)
+  (setq projectile-switch-project-action 'projectile-dired)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
