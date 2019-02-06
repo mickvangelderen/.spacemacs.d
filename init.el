@@ -40,7 +40,13 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-complete-with-key-sequence nil
+                      auto-completion-idle-delay nil
+                      auto-completion-enable-sort-by-usage t
+                      )
      better-defaults
      emacs-lisp
      (git :variables
