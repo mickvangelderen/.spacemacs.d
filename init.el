@@ -482,6 +482,12 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+  ;; http://www.flycheck.org/en/latest/user/syntax-checks.html#check-automatically
+  ;; Add 'idle-buffer-switch which does the check when we switch to another buffer.
+  (setq flycheck-check-syntax-automatically '('save 'idle-change 'idle-buffer-switch 'new-line 'mode-enabled))
+  (setq flycheck-idle-buffer-switch-delay 0.1)
+  (setq flycheck-buffer-switch-check-intermediate-buffers t)
+
   ;; (defun mickvangelderen/c-mode-common-hook ()
   ;;   "Customize c-mode-common to my liking."
   ;;   ;; My personal indentation favorites.
