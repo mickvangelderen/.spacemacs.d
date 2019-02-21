@@ -50,7 +50,7 @@ This function should only modify configuration layer settings."
           )
      markdown
      multiple-cursors
-     neotree
+     treemacs
      ;; org
      (shell :variables
             shell-default-height 30
