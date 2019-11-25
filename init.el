@@ -452,6 +452,9 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+
+  (setq tex-fontify-script nil)
+
   ;; https://github.com/syl20bnr/spacemacs/issues/1603#issuecomment-213570021
   (remove-hook 'prog-mode-hook #'smartparens-mode)
   (spacemacs/toggle-smartparens-globally-off)
