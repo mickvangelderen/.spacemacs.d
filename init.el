@@ -486,6 +486,11 @@ before packages are loaded."
 
   (setq tex-fontify-script nil)
 
+  (progn
+    (add-to-list 'auto-mode-alist '("\\.comp\\'" . glsl-mode))
+    (add-to-list 'auto-mode-alist '("\\.tesc\\'" . glsl-mode))
+    (add-to-list 'auto-mode-alist '("\\.tese\\'" . glsl-mode)))
+
   ;; https://github.com/syl20bnr/spacemacs/issues/1603#issuecomment-213570021
   (remove-hook 'prog-mode-hook #'smartparens-mode)
   (spacemacs/toggle-smartparens-globally-off)
