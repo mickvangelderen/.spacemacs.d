@@ -532,7 +532,7 @@ before packages are loaded."
   (add-hook 'magit-mode-hook 'mickvangelderen/magit-focus-hook)
 
   ;; Open the project directory instead of a file when switching projects.
-  (setq projectile-switch-project-action 'projectile-dired)
+  ;; (setq projectile-switch-project-action 'projectile-dired)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
