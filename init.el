@@ -486,6 +486,7 @@ before packages are loaded."
 
   (setq tex-fontify-script nil)
 
+  ;; https://github.com/jimhourihan/glsl-mode/blob/master/glsl-mode.el
   (progn
     (add-to-list 'auto-mode-alist '("\\.comp\\'" . glsl-mode))
     (add-to-list 'auto-mode-alist '("\\.tesc\\'" . glsl-mode))
